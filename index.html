@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EQ Finder — 나만의 블루투스 EQ 설정 찾기</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
+  <meta name="description" content="내가 듣는 음악으로 A/B 청음 테스트를 진행하고, 블루투스 이어폰·헤드폰 앱 EQ 슬라이더에 바로 입력할 수 있는 최적 설정값을 찾아드립니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1.1">
+</head>
+
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ── Step 0: Hero ── -->
+  <section id="step-0" class="step active">
+    <div class="step-content hero-layout">
+      <div class="hero-text">
+        <div class="hero-badge">🎧 Personal EQ Finder</div>
+        <h1 class="hero-title">내가 듣는 음악으로<br><span class="gradient-text">나만의 EQ</span>를 찾아보세요</h1>
+        <p class="hero-desc">음악을 업로드하면 A/B 청음 비교로 블루투스 기기 앱<br>EQ 슬라이더에 바로 입력할 최적값을 찾아드립니다.</p>
+        <div class="hero-flow">
+          <div class="flow-item">
+            <div class="flow-icon">🎵</div>
+            <div class="flow-label">음악 업로드</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">
+            <div class="flow-icon">🔊</div>
+            <div class="flow-label">A/B 비교</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">
+            <div class="flow-icon">✨</div>
+            <div class="flow-label">EQ값 확인</div>
+          </div>
+        </div>
+        <button id="btn-start" class="btn btn-primary btn-xl">테스트 시작하기 <span class="btn-arrow">→</span></button>
+        <p class="hero-note">🔒 음원은 서버에 전송되지 않습니다 · 브라우저에서만 처리</p>
+      </div>
+      <div class="hero-viz" aria-hidden="true">
+        <div class="eq-bars-anim">
+          <div class="eq-bar-a" style="--h:45%;--d:0s"></div>
+          <div class="eq-bar-a" style="--h:72%;--d:.1s"></div>
+          <div class="eq-bar-a" style="--h:58%;--d:.2s"></div>
+          <div class="eq-bar-a" style="--h:88%;--d:.3s"></div>
+          <div class="eq-bar-a" style="--h:63%;--d:.4s"></div>
+          <div class="eq-bar-a" style="--h:47%;--d:.5s"></div>
+          <div class="eq-bar-a" style="--h:79%;--d:.6s"></div>
+          <div class="eq-bar-a" style="--h:54%;--d:.7s"></div>
+          <div class="eq-bar-a" style="--h:68%;--d:.8s"></div>
+          <div class="eq-bar-a" style="--h:38%;--d:.9s"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Step 1: EQ Format ── -->
+  <section id="step-1" class="step">
+    <div class="step-content">
+      <div class="step-header">
+        <div class="step-chip">STEP 1 / 4</div>
+        <h2 class="step-title">어떤 EQ 앱을 사용하시나요?</h2>
+        <p class="step-desc">결과를 앱의 밴드 구성에 맞게 보여드립니다.</p>
+      </div>
+      <div class="format-grid">
+        <button id="btn-5band" class="format-card" aria-label="5밴드 선택">
+          <div class="format-viz">
+            <div class="mini-bars">
+              <div class="mini-bar-el" style="--h:55%"></div>
+              <div class="mini-bar-el" style="--h:38%"></div>
+              <div class="mini-bar-el" style="--h:72%"></div>
+              <div class="mini-bar-el" style="--h:50%"></div>
+              <div class="mini-bar-el" style="--h:33%"></div>
+            </div>
+          </div>
+          <div class="format-info">
+            <h3>5밴드 EQ</h3>
+            <div class="band-tags">
+              <span>60Hz</span><span>230Hz</span><span>910Hz</span><span>3.6kHz</span><span>14kHz</span>
+            </div>
+            <p>대부분의 블루투스 앱 기본 구성</p>
+          </div>
+          <div class="card-check">✓</div>
+        </button>
+        <button id="btn-10band" class="format-card" aria-label="10밴드 선택">
+          <div class="format-viz">
+            <div class="mini-bars">
+              <div class="mini-bar-el" style="--h:48%"></div>
+              <div class="mini-bar-el" style="--h:65%"></div>
+              <div class="mini-bar-el" style="--h:42%"></div>
+              <div class="mini-bar-el" style="--h:78%"></div>
+              <div class="mini-bar-el" style="--h:38%"></div>
+              <div class="mini-bar-el" style="--h:82%"></div>
+              <div class="mini-bar-el" style="--h:55%"></div>
+              <div class="mini-bar-el" style="--h:62%"></div>
+              <div class="mini-bar-el" style="--h:33%"></div>
+              <div class="mini-bar-el" style="--h:47%"></div>
+            </div>
+          </div>
+          <div class="format-info">
+            <h3>10밴드 EQ</h3>
+            <div class="band-tags">
+              <span>31Hz</span><span>62Hz</span><span>125Hz</span><span>250Hz</span><span>500Hz</span>
+              <span>1kHz</span><span>2kHz</span><span>4kHz</span><span>8kHz</span><span>16kHz</span>
+            </div>
+            <p>더 세밀한 조정을 원할 때</p>
+          </div>
+          <div class="card-check">✓</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Step 2: Upload ── -->
+  <section id="step-2" class="step">
+    <div class="step-content">
+      <div class="step-header">
+        <div class="step-chip">STEP 2 / 4</div>
+        <h2 class="step-title">테스트할 음악을 업로드하세요</h2>
+        <p class="step-desc">평소 즐겨 듣는 음악일수록 더 정확한 결과를 얻을 수 있습니다.</p>
+      </div>
+      <div id="upload-zone" class="upload-zone" role="button" tabindex="0" aria-label="파일 업로드 영역. 클릭하거나 파일을 드래그하세요.">
+        <input type="file" id="file-input" accept="audio/*" aria-hidden="true" tabindex="-1">
+        <div class="upload-icon-wrap">🎵</div>
+        <p class="upload-title">음악 파일을 드래그하거나 클릭해서 선택</p>
+        <p class="upload-formats">MP3 · WAV · FLAC · AAC · OGG</p>
+        <span class="upload-btn-label">파일 선택하기</span>
+      </div>
+      <div id="upload-progress" class="upload-progress hidden">
+        <div class="progress-spinner"></div>
+        <p id="progress-text">음원 분석 중...</p>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+      <div id="upload-error" class="upload-error hidden">
+        <span>⚠️</span> <span id="error-message">오류가 발생했습니다.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Step 4: Attribute-Based Test ── -->
+  <section id="step-4" class="step">
+    <div class="step-content test-layout">
+      <!-- 동적 질문 컨테이너 -->
+      <div id="attr-test-container">
+        <!-- AttributeUI가 여기에 렌더링됨 -->
+      </div>
+
+      <!-- Stage 3: 최종 후보 비교 (MUSHRA-lite) 전용 컨테이너 (초기엔 숨김) -->
+      <div id="mushra-container" class="hidden">
+        <div class="step-header">
+          <div class="step-chip">STAGE 3 / 3</div>
+          <h2 class="step-title">최종 후보를 비교해보세요</h2>
+          <p class="step-desc">가장 마음에 드는 스타일을 하나만 골라주세요.</p>
+        </div>
+        
+        <div class="mushra-section">
+          <div class="mushra-btns">
+            <button id="btn-mushra-a" class="mushra-btn" data-id="P1">
+              <span class="mushra-label">후보 A</span>
+              <span class="mushra-name">표준 (Standard)</span>
+            </button>
+            <button id="btn-mushra-b" class="mushra-btn" data-id="P2">
+              <span class="mushra-label">후보 B</span>
+              <span class="mushra-name">저음 보강 (Warm)</span>
+            </button>
+            <button id="btn-mushra-c" class="mushra-btn" data-id="P3">
+              <span class="mushra-label">후보 C</span>
+              <span class="mushra-name">고음 선명 (Clear)</span>
+            </button>
+          </div>
+          <p class="mushra-hint">버튼을 눌러 실시간으로 비교해보세요.</p>
+        </div>
+
+        <div class="mushra-confirm">
+          <button id="btn-mushra-confirm" class="btn btn-primary btn-xl" disabled>최종 선택 및 결과 보기</button>
+        </div>
+      </div>
+
+      <!-- 하단 공통 파형 컨트롤 (작게 유지) -->
+      <div class="test-waveform-box mini">
+        <div class="flex-row">
+          <span id="selected-segment-display">0:00 ~ 0:10</span>
+          <div class="loop-badge">🔁 반복 재생 중</div>
+        </div>
+        <div class="waveform-wrap-mini">
+          <div id="waveform"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Step 5: Results ── -->
+  <section id="step-5" class="step">
+    <div class="step-content step-wide">
+      <div class="result-hero">
+        <div class="result-confetti" aria-hidden="true">🎉</div>
+        <h2 class="result-title">당신의 EQ 설정이 완성됐어요!</h2>
+        <div class="result-meta-row">
+          <span id="r-filename" class="r-meta-chip">파일명.mp3</span>
+          <span class="r-meta-sep">·</span>
+          <span id="r-eqtype" class="r-meta-chip">5밴드</span>
+          <span class="r-meta-sep">·</span>
+          <span id="r-segment" class="r-meta-chip">12초 구간</span>
+        </div>
+      </div>
+      <div id="result-eq-visual" class="result-eq-visual"></div>
+
+      <!-- Before/After 비교 청음 컨트롤러 -->
+      <div class="result-demo-card">
+        <h3 class="result-section-label">🎧 직접 들어보며 달라진 소리를 비교해보세요</h3>
+        <p class="text-xs text-gray-400 mb-4">현재 화면에서 설정값이 바로 적용된 음원을 재생합니다.</p>
+        <div class="demo-controls">
+          <button id="btn-demo-play" class="btn btn-primary">▶ 재생</button>
+          <div class="demo-toggle-group">
+            <button id="btn-demo-raw" class="btn-demo-toggle active">원본 소리</button>
+            <button id="btn-demo-eq" class="btn-demo-toggle">맞춤 EQ 적용</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-table-section">
+        <h3 class="result-section-label">밴드별 추천값</h3>
+        <table id="result-table" class="result-table">
+          <thead>
+            <tr>
+              <th>밴드</th>
+              <th>역할</th>
+              <th>추천값</th>
+              <th>방향</th>
+            </tr>
+          </thead>
+          <tbody id="result-tbody"></tbody>
+        </table>
+      </div>
+      <div class="result-copy-row">
+        <button id="btn-copy" class="btn btn-primary">📋 설정값 복사</button>
+        <div id="copy-toast" class="copy-toast hidden">✅ 복사됐습니다!</div>
+      </div>
+      <div class="guide-card">
+        <h3 class="guide-title">📱 기기 앱에 적용하는 방법</h3>
+        <ol class="guide-list">
+          <li>블루투스 기기 전용 앱을 실행합니다</li>
+          <li>EQ 또는 사운드 설정 메뉴로 이동합니다</li>
+          <li>각 Hz 슬라이더를 추천값만큼 올리거나 내립니다</li>
+          <li>적용 후 불편함이 있으면 미세 조정 테스트를 이용하세요</li>
+        </ol>
+      </div>
+      <div class="result-actions">
+        <button id="btn-retest" class="btn btn-secondary">🔄 다른 음악으로 다시 테스트</button>
+        <button id="btn-back-to-start" class="btn btn-ghost">처음으로</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast-global" class="toast-global hidden" role="alert" aria-live="polite"></div>
+
+  <script type="module" src="app.js?v=11"></script>
+</body>
+
+</html>
